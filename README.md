@@ -1,5 +1,9 @@
+![Схема подключения TFT 2.4](https://github.com/gulik17/Arduino_ST7789_Fast/blob/master/схема.png)
+
+![Фото рабочего экрана](https://github.com/gulik17/Arduino_ST7789_Fast/blob/master/NQTcC5PRAGASZr-QYsqis7-RnGY-1920.jpg)
+
 # Arduino_ST7789_Fast
-Fast SPI library for the ST7789 240x240 IPS display
+Fast SPI library for the ST7789 240x320 IPS display 2.4 GMT024-08-SPI8P
 
 Significantly optimized for 16MHz **AVR Arduino boards** (2.5-5x faster than other libraries).
 
