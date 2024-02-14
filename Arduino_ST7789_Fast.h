@@ -10,7 +10,7 @@
 //#define COMPATIBILITY_MODE
 
 // define for LCD boards where CS pin is internally connected to the ground
-#define CS_ALWAYS_LOW
+//#define CS_ALWAYS_LOW
 // ------------------------------
 
 #include "Arduino.h"
@@ -19,7 +19,7 @@
 #include <avr/pgmspace.h>
 
 #define ST7789_TFTWIDTH 	240
-#define ST7789_TFTHEIGHT 	240
+#define ST7789_TFTHEIGHT 	320
 
 // Color definitions
 
