@@ -238,7 +238,7 @@ void Arduino_ST7789::init(uint16_t width, uint16_t height)
   _height = height;
 
   displayInit(init_240x240);
-  setRotation(2);
+  //setRotation(0);
 }
 
 // ----------------------------------------------------------
@@ -478,12 +478,36 @@ void Arduino_ST7789::fillScreen(uint16_t color)
 // ----------------------------------------------------------
 void Arduino_ST7789::fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color) 
 {
+  // rudimentary clipping (drawChar w/big text requires this)
   if(x>=_width || y>=_height || w<=0 || h<=0) return;
   if(x+w-1>=_width)  w=_width -x;
   if(y+h-1>=_height) h=_height-y;
   setAddrWindow(x, y, x+w-1, y+h-1);
 
-  writeMulti(color,w*h);
+  uint8_t hi = color >> 8, lo = color;
+    
+  uint32_t num = (uint32_t)w*h;
+  uint16_t num16 = num>>4;
+  while(num16--) {
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+    writeSPI(hi); writeSPI(lo);
+  }
+  uint8_t num8 = num & 0xf;
+  while(num8--) { writeSPI(hi); writeSPI(lo); }
 
   CS_IDLE;
   SPI_END;
